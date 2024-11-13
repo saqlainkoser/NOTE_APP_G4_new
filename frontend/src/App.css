@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+   margin: 0;
+   padding: 0; 
+} 
+
+body{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins" , sans-serif;
+}
+
+:root{
+    --primary:#fff;
+    --seco:#d2d2d2;
+    --accent:#F57E57;
+}
+
+.form{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 30vw;
+    min-height: 30vh;
+}
+
+.inputBox{
+    width: 100%;
+    background-color: #F4F4F4;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.inputBox input{
+    flex:1;
+    padding: 7px;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    
+}
+
+.inputBox2{
+    width: 100%;
+    background-color: #F4F4F4;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.inputBox2 input{
+    flex:1;
+    padding: 7px;
+    background-color: transparent;
+    border: 3;
+    outline: 3;
+}
+
+
+
+.btnBig{
+    width: 100%;
+    padding: 10px;
+    background-color: var(--accent);
+    color: var(--primary);
+    text-align: center;
+    border-radius: 30px;
+    cursor: pointer;
+   /* transition-property: width; */
+   transition:ease .2s; 
+}
+
+.btnBig:hover{
+    transform: scale(102%);
+}
+
+
+.btnNormal{
+    min-width:  130px;
+    padding: 10px;
+    background-color: var(--accent);
+    color: #fff;
+    cursor:pointer;
+    border: 0;
+    outline: 0;
+    border-radius: 5px;
+}
+
+.gridItems{
+    width: 100%;
+    padding: 0px 50px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap:10px;
+}
+
+.gridItems .note{
+    background-color: #f4f4f4;
+    padding: 10px;
+    height: 220px;
+    cursor: pointer;
+}
+
+
+.sp-text{
+    color: var(--accent);
+}
+
+
+.checkbox.active{
+    background-color: #F57E57;
+}
