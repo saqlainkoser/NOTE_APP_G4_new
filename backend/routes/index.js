@@ -30,7 +30,7 @@ router.post('/signup', async (req, res) => {
           email,
           password: hash
         });
-
+        log
         var jwt = require('jsonwebtoken');
         var token = jwt.sign({ userId: user._id, email: user.email }, secret);
 
@@ -76,8 +76,6 @@ router.post('/login',async (req,res)=>{
     })
   }
 
-
-
 })
 
 //Note 
@@ -87,7 +85,7 @@ router.post('/login',async (req,res)=>{
 const notesModel = require("../Models/noteModel.js")
 
 router.post('/getNotes',async(req,res)=>{
-  let notes = await notesModel.find({_id:req.body.userId});
+  let notes = await notesModel.find({uploadedBy:req.body.uploadedBy});
   if(notes.length > 0 ){
     res.json(notes);
   }
@@ -115,6 +113,9 @@ router.post('/addNotes',async (req,res)=>{
     noteId:note._id
   })
 })
+
+
+
 
 
 //addNotes

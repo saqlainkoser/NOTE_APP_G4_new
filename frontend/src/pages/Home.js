@@ -1,9 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Note from '../components/Note'
 import Footer from '../components/Footer'
 
 function Home() {
+
+  let getNotes = () =>{
+    let res = fetch("http://localhost:8000/getNotes",{
+      mode:"cors",
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify({uploadedBy:"shaan"})
+    }).then(resp=>resp.json()).then(data=>{
+      console.log(data);
+      if(data.success){
+        setData(data)
+      }
+      else{
+        setError(data.msg)
+      }
+    })
+  }
+
+  useEffect(()=>{
+    getNotes()
+  },[])
+
   return (
     <div>
       <Navbar/>
@@ -15,10 +39,7 @@ function Home() {
       </div>
 
       <div className='gridItems'>
-        <Note/>
-        <Note/>
-        <Note/>
-        <Note/>
+        <Note note={{title:"new Title",description:"New Description" ,date:"02/02/2024"}} index={1} / >
       </div>
 
       <Footer/>

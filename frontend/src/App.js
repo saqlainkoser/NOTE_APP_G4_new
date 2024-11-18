@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import Profile from './pages/Profile';
 import Addnote from './pages/Addnote';
 import Search from './pages/Search';
+import Login from './components/Login';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/addnewnote' element={<Addnote/>}/>
         <Route path='/search' element={<Search/>}/>
+        <Route path='/login' element={<Login/>}/>
       </Routes>
     </BrowserRouter>
    </>
