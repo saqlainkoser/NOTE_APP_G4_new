@@ -115,7 +115,14 @@ router.post('/addNotes',async (req,res)=>{
 })
 
 
-
+router.post('/deleteNote',async(req,res)=>{
+  let note = await notesModel.findByIdAndDelete({_id:req.body.noteId});
+  res.json({
+    success:true,
+    msg:"Note Deleted Successfully !",
+    deleteNote:req.body.noteId
+  })
+})
 
 
 //addNotes

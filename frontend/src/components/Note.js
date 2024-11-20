@@ -1,18 +1,35 @@
 import React, { useState } from 'react'
 
 function Note({ note , height ,index }) {
-
+    // console.log(note._id);
+    
     const [isDeleteModel,setisDeleteModel] = useState(false);
 
-    const deleteNote =()=>{
-        setisDeleteModel(false)
+    const deleteNote =(id,noteID)=>{
+       console.log("ID: ",id,noteID);
+       let res = fetch("http://localhost:8000/deleteNote",{
+        method: 'POST',
+        mode:"cors",
+        headers:{'Content-Type': 'application/json'},
+        body:JSON.stringify({noteId:id})
+       }).then(resp=>resp.json()).then(data=>{
+        console.log(data);
+        if(data.success){
+            alert("Note Deleted");
+            document.getElementById(noteID).remove();
+        }
+        else{
+            alert("Error")
+        }
+       }).catch(err=>console.log(err));
+       setisDeleteModel(false);
     }
 
 
 
     return (
         <div>
-            <div className="note relative" style={{height:height}}>
+            <div className="note relative" id={`note${index}`} style={{height:height}}>
                 <p className='text-[grey]'>Note {index + 1}</p>
                 <h1 className='text-[#000] text-[20px]'>{note.title} </h1>
                 <p className='text-[grey] w-[80%] line-clamp-4'>{note.description}</p>
@@ -34,7 +51,7 @@ function Note({ note , height ,index }) {
                         <p className='m-0 p-0 text-[grey] ' >Do you want to Delete This Noote <br/> Yes / No </p>
                     
                         <div className="flex items-center gap-2 absolute bottom-[5%] w-full ">
-                            <button onClick={()=>deleteNote()} className='min-w-[46%] h-12 bg-red-600 text-white border-0 outline-0 cursor-pointer'>Yes</button>
+                            <button onClick={()=>deleteNote(note._id,`note${index}`)} className='min-w-[46%] h-12 bg-red-600 text-white border-0 outline-0 cursor-pointer'>Yes</button>
                             <button onClick={()=>deleteNote()}  className='min-w-[46%] h-12 bg-blue-600 text-white border-0 outline-0 cursor-pointer'>No</button>
                         </div>
                     </div>

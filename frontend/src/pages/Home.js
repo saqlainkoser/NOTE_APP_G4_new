@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Note from '../components/Note'
 import Footer from '../components/Footer'
 
 function Home() {
+  const [data, setData] = useState(null);
+  const [error,setError] = useState("");
 
   let getNotes = () =>{
     let res = fetch("http://localhost:8000/getNotes",{
@@ -14,8 +16,8 @@ function Home() {
       },
       body:JSON.stringify({uploadedBy:"shaan"})
     }).then(resp=>resp.json()).then(data=>{
-      console.log(data);
-      if(data.success){
+      if(data.length >0){
+        console.log(data);
         setData(data)
       }
       else{
@@ -30,7 +32,7 @@ function Home() {
 
   return (
     <div>
-      <Navbar/>
+      <Navbar lnk='/addnewnote'/>
       <div className='mt-[20px] flex items-center justify-between w-screen px-[50px]'>
         <h1 className='text-2xl'>Hi, Shaan</h1>
         <div className="inputBox !w-[350px]">
@@ -39,7 +41,19 @@ function Home() {
       </div>
 
       <div className='gridItems'>
-        <Note note={{title:"new Title",description:"New Description" ,date:"02/02/2024"}} index={1} / >
+        {/* <Note note={{title:"new Title",description:"New Description" ,date:"02/02/2024"}} index={1} / > */}
+
+
+      {
+        data ? data.map((el,index)=>{
+          return(
+            <>
+            <Note key={index} note={{title:el.title,description:el.description,date:el.date,_id:el._id}} index={index} />
+            </> 
+          )
+        }) : "No Notes Found"
+      }
+
       </div>
 
       <Footer/>
