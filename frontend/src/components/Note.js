@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 function Note({ note , height ,index }) {
     // console.log(note._id);
     
     const [isDeleteModel,setisDeleteModel] = useState(false);
+    const navigate = useNavigate()
 
     const deleteNote =(id,noteID)=>{
        console.log("ID: ",id,noteID);
@@ -25,6 +27,11 @@ function Note({ note , height ,index }) {
        setisDeleteModel(false);
     }
 
+    const editNote = (id) =>{
+        navigate(`/editNote/${id}`)
+        // console.log(note._id);
+        
+    }
 
 
     return (
@@ -37,7 +44,7 @@ function Note({ note , height ,index }) {
                     <p className='text-[grey]'>{new Date(note.date).toDateString()}</p>
                     <div className="flex items-center gap-1">
                         <img onClick={()=>setisDeleteModel(true)} className='w-[30px] h-[30px]' src={require("../images/delete.png")}></img>
-                        <img className='w-[30px] h-[30px]' src={require("../images/edit.png")}></img>
+                        <img onClick={()=>editNote(note._id)} className='w-[30px] h-[30px]' src={require("../images/edit.png")}></img>
                     </div>
                 </div>
             </div>

@@ -125,6 +125,20 @@ router.post('/deleteNote',async(req,res)=>{
 })
 
 
+router.post('/getNote',async(req,res)=>{
+  let note = await notesModel.findOne({_id:req.body.noteId});
+  if(note){
+    res.json(note);
+  }
+  else{
+    res.json({
+      success:false,
+      msg:"No Note Found !"
+    })
+  }
+})
+
+
 //addNotes
 //DeleteNotes
 //updateNotes

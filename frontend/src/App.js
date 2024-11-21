@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import Addnote from './pages/Addnote';
 import Search from './pages/Search';
 import Login from './components/Login';
+import EditNote from './pages/EditNote';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/addnewnote' element={<Addnote/>}/>
         <Route path='/search' element={<Search/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/editNote/:id' element={<EditNote/>}/>
       </Routes>
     </BrowserRouter>
    </>
