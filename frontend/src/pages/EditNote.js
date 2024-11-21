@@ -23,22 +23,24 @@ function EditNote() {
 //function to submit the form
 const submitForm = (e) =>{
   e.preventDefault();
-  let res = fetch("http://localhost:8000/EditNotes",{
+  let res = fetch("http://localhost:8000/updateNote",{
     method: "POST",
     mode:"cors",
     headers:{
       'Content-Type':"application/json"
     },
     body:JSON.stringify({
+      noteId:id,
       title:title,
       description:description,
       content:content,
       isImportant:isImportant,
-      uploadedBy:uploadedBy})
+      uploadedBy:uploadedBy
+    })
   }).then(response => response.json()).then(data=>{
     console.log(data);
-    if(data.success){
-      alert("Note Addedd Successfull");
+    if(data){
+      alert("Note Updated Successfully");
       navigate("/");
     }else{
       alert("Error while adding note");

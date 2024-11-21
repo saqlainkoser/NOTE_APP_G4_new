@@ -15,7 +15,7 @@ function Note({ note , height ,index }) {
         headers:{'Content-Type': 'application/json'},
         body:JSON.stringify({noteId:id})
        }).then(resp=>resp.json()).then(data=>{
-        console.log(data);
+        
         if(data.success){
             alert("Note Deleted");
             document.getElementById(noteID).remove();
@@ -37,6 +37,12 @@ function Note({ note , height ,index }) {
     return (
         <div>
             <div className="note relative" id={`note${index}`} style={{height:height}}>
+                {
+                    (note.isImportant == "true")  ? <>
+                    <div className="imp w-[10%] bg-white text-[1.3vw] text-[#fff] absolute right-3 top-5 text-center rounded-md shadow-md">⭐</div> 
+                    </> : ""   
+                }
+                
                 <p className='text-[grey]'>Note {index + 1}</p>
                 <h1 className='text-[#000] text-[20px]'>{note.title} </h1>
                 <p className='text-[grey] w-[80%] line-clamp-4'>{note.description}</p>

@@ -47,9 +47,7 @@ function Home() {
       {
         data ? data.map((el,index)=>{
           return(
-            <>
-            <Note key={index} note={{title:el.title,description:el.description,date:el.date,_id:el._id}} index={index} />
-            </> 
+            <Note key={index} note={el} index={index} />
           )
         }) : "No Notes Found"
       }

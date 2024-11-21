@@ -30,7 +30,6 @@ router.post('/signup', async (req, res) => {
           email,
           password: hash
         });
-        log
         var jwt = require('jsonwebtoken');
         var token = jwt.sign({ userId: user._id, email: user.email }, secret);
 
@@ -137,6 +136,30 @@ router.post('/getNote',async(req,res)=>{
     })
   }
 })
+
+router.post('/updateNote',async(req,res)=>{
+  let result = await notesModel.updateOne(
+    {_id:req.body.noteId},
+    {$set:{
+      title:req.body.title,
+      description:req.body.description,
+      content:req.body.content, 
+      isImportant:req.body.isImportant,
+      uploadedBy:req.body.uploadedBy
+    }}
+  );
+  if(result){
+    res.json(result);
+  }
+  else{
+    res.json({
+      success:false,
+      msg:"No Note Found !"
+    })
+  }
+})
+
+
 
 
 //addNotes
