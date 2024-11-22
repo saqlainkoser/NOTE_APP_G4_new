@@ -7,7 +7,7 @@ function Home() {
   const [data, setData] = useState(null);
   const [error,setError] = useState("");
 
-  let getNotes = () =>{
+  let getNotes = (kywrd) =>{
     let res = fetch("http://localhost:8000/getNotes",{
       mode:"cors",
       method:"POST",
@@ -36,7 +36,12 @@ function Home() {
       <div className='mt-[20px] flex items-center justify-between w-screen px-[50px]'>
         <h1 className='text-2xl'>Hi, Shaan</h1>
         <div className="inputBox !w-[350px]">
-          <input type="text" name="" id=""  placeholder='Search Notes' className='!p-[11px]'/>
+          <input 
+          onKeyDown={(e) => {
+            if (e.key === "Enter")
+                console.log("Enter");
+            }}
+          type="text" name="" id=""  placeholder='Search Notes' className='!p-[11px]'/>
         </div>
       </div>
 
